@@ -3,6 +3,8 @@ on:
   push:
     branches: [invest-ai-mobile-apk]
   workflow_dispatch:
+  pull_request:
+    branches: [main]
 permissions:
   contents: read
 jobs:

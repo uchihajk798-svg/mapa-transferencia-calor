@@ -22,8 +22,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - name: Preparar SDK Android
-        uses: android-actions/setup-android@v3
+      - name: Verificar SDK Android do GitHub runner
+        run: |
+          echo "SDK: ${ANDROID_HOME:-${ANDROID_SDK_ROOT:-indisponivel}}"
+          test -d "${ANDROID_HOME:-${ANDROID_SDK_ROOT}}"
+          ls "${ANDROID_HOME:-${ANDROID_SDK_ROOT}}/platforms"
       - name: Extrair aplicativo
         run: unzip -q -o INVEST_AI_mobile_source.zip
       - name: Instalar dependencias

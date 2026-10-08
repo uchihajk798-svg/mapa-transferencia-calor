@@ -35,6 +35,9 @@ jobs:
       - name: Testar funcoes locais
         working-directory: mobile
         run: npm test
+      - name: Verificar tipagem do React Native
+        working-directory: mobile
+        run: npm run check
       - name: Gerar projeto nativo
         working-directory: mobile
         run: npx expo prebuild --platform android --clean --non-interactive

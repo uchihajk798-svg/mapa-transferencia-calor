@@ -1,9 +1,9 @@
-# INVEST AI Mobile — APK Android
+# INVEST AI Mobile v0.3 — carteira local mais funcional
 
-Este ramo `invest-ai-mobile-apk` contém o código-fonte mobile no arquivo `INVEST_AI_mobile_source.zip` e o GitHub Actions para compilar um **APK release instalável** (assinado com chave de teste, não apropriada para publicação na Play Store). O projeto principal do repositório na branch `main` não foi alterado por este processo, exceto pelo arquivo de teste de permissão criado anteriormente.
+A branch é exclusiva do APK para testes. **Não mesclar ao projeto de física da branch main**.
 
-No GitHub, abra **Actions → INVEST AI - Compilar APK Android**. Veja a execução disparada pelo push; se o workflow não iniciar automaticamente, use **Run workflow** escolhendo a branch `invest-ai-mobile-apk`.
+Esta versão **não habilita cadastro/login online**: a API FastAPI ainda não foi publicada. Em vez de mostrar um cadastro impossível, abre um modo local com carteira manual, compras, vendas, preço médio, histórico, dados persistidos no Android, lista de acompanhamento, Academia e simulador. Preços de criptomoedas e Selic são consultados diretamente em provedores externos e podem estar indisponíveis. **Os dados locais não estão criptografados nem sincronizados com um servidor**.
 
-Se a execução terminar com êxito, entre em **Artifacts** e baixe `INVEST_AI_MOBILE_APK`, que contém o arquivo `app-release.apk`.
+A compilação acontece no GitHub Actions, arquivo .github/workflows/invest-ai-apk.yml; depois do status verde, baixe o artifact INVEST_AI_MOBILE_APK.
 
-Observação: Sem configurar o backend em HTTPS e `EXPO_PUBLIC_API_URL`, o app disponibiliza somente funcionalidades locais como conteúdos educativos e simulador. Este é um APK para TESTES, não uma versão de produção nem uma recomendação de investimento.
+Pendente: backend HTTPS, banco Postgres, notificações, IA conversacional, radar e avaliação em dispositivo real. Não executar ordens financeiras.

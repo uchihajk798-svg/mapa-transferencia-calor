@@ -1,0 +1,32 @@
+name: INVEST AI WEB - Validação v0.5
+on:
+  push:
+    branches: [invest-ai-web-v05-check]
+  workflow_dispatch:
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Extrair projeto
+        run: unzip -q -o INVEST_AI_web_source.zip
+      - name: Instalar dependências
+        working-directory: frontend
+        run: npm install --no-audit --no-fund
+      - name: Testes de domínio
+        working-directory: frontend
+        run: npm run test
+      - name: Verificar TypeScript
+        working-directory: frontend
+        run: npm run lint
+      - name: Construir site estático
+        working-directory: frontend
+        run: npm run build

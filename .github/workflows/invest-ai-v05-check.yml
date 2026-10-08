@@ -3,6 +3,8 @@ on:
   push:
     branches: [invest-ai-web-v05-check]
   workflow_dispatch:
+  pull_request:
+    branches: [main]
 permissions:
   contents: read
 jobs:

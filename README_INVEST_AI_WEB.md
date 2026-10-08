@@ -1,20 +1,10 @@
-# INVEST AI Web v0.6
-
-Site: https://invest-ai-web.onrender.com
-
-**Novidades em produção**
-- Radar Mundo: notícias internacionais recentes agregadas pelo GDELT (com veículo original, data, tema e links).
-- Indicadores: Meta Selic SGS 432 e IPCA mensal SGS 433 do Banco Central (dependem da disponibilidade da API).
-- Assistente financeiro **explicativo e baseado em regras**, com contexto da carteira, moedas e notícias, sem promessas de lucros.
-- Carteira local, alertas no site, radar de preço e simulador mantidos.
-
-**Importante:** IA generativa não está habilitada no site estático. Requer API HTTPS com login, servidor seguro e OPENAI_API_KEY. O backend preparado encontra-se na branch invest-ai-api-render. Não deixar chave na web.
-
-Os dados locais ficam somente no navegador. Sem compra e venda na corretora, nem alertas push. Notícias do agregador não possuem checagem editorial independente. Ausência de dados externos é exibida como indisponibilidade.
-
-O ZIP INVEST_AI_web_source.zip contém o código Next.js. No Render:
-- Branch: invest-ai-web
-- Build command: unzip -q -o INVEST_AI_web_source.zip && cd frontend && npm install --no-audit --no-fund && npm run build
+# INVEST AI Web v0.7 — IA gratuita e backup de conta
+- Site: https://invest-ai-web.onrender.com
+- API preparada: https://invest-ai-api-web.onrender.com
+- Cadastro online e backup por conta via /api/mobile/auth e /api/me/cloud-backup com tokens temporários em memória, **só disponíveis quando a API tiver PostgreSQL real**.
+- Sem cobrança: modo IA educativa por regras sempre gratuito; Gemini Flash-Lite só com chave Google AI Studio Free Tier sem billing, limite 12 perguntas/conta/dia. Não ativar OpenAI API paga.
+- Não existe sync automático: ações explícitas Salvar e Restaurar com controle de versão.
+- Expiração Postgres gratuito: 2026-11-07. Faça backups.
+- Para build Render: unzip -q -o INVEST_AI_web_source.zip && cd frontend && npm install --no-audit --no-fund && npm run build
 - Publish: frontend/out
-
-Execução dos testes: unzip INVEST_AI_web_source.zip && cd frontend && npm install && npm test && npm run lint && npm run build.
+- NEXT_PUBLIC_API_URL=https://invest-ai-api-web.onrender.com (pública, não é segredo).

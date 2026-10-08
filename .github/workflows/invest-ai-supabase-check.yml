@@ -1,0 +1,36 @@
+name: INVEST AI Supabase — validação
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [invest-ai-supabase-fix-check]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Extrair versão migrada
+        run: unzip -q -o INVEST_AI_web_source.zip
+      - name: Instalar dependências
+        working-directory: frontend
+        run: npm install --no-audit --no-fund
+      - name: Testar lógica
+        working-directory: frontend
+        run: npm test
+      - name: Verificar TypeScript
+        working-directory: frontend
+        run: npm run lint
+      - name: Verificar Worker
+        run: node --check frontend/worker/index.js
+      - name: Compilar versão web
+        working-directory: frontend
+        run: npm run build
+      - name: Validar arquivos de deploy
+        run: test -s frontend/out/index.html && test -s frontend/wrangler.jsonc

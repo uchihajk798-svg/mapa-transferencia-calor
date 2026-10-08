@@ -19,3 +19,6 @@ O backend usa produção fail-closed: **não inicializa se DATABASE_URL for SQLi
 Endpoint para conta mobile/bearer: `/api/mobile/auth/register` e `/api/mobile/auth/login`, com acesso por 15 minutos e sem token persistido no navegador. Backup individual: `/api/me/cloud-backup` com revisão otimista. Segue sem e-mail de recuperação. Banco e Redis são necessários para segurança e durabilidade.
 
 As etapas de deploy da API podem falhar enquanto a conexão DATABASE_URL não for configurada. **Isso é proposital: não aceitar contas que serão perdidas.**
+
+
+Health v0.7.0 publica `persistent_storage=true` exclusivamente quando o servidor está usando PostgreSQL. O site exige essa confirmação antes de habilitar contas.

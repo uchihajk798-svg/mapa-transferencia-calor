@@ -1,11 +1,20 @@
-# INVEST AI Web 0.5.1
+# INVEST AI Web v0.6
 
-Site publicado: https://invest-ai-web.onrender.com
+Site: https://invest-ai-web.onrender.com
 
-Modo local sem cadastro. Radar educacional de variações de preços com fonte CoinGecko, alertas na página, watchlist, carteira manual, distribuição por custo de aquisição, simulador, educação, backup JSON e perfil local.
+**Novidades em produção**
+- Radar Mundo: notícias internacionais recentes agregadas pelo GDELT (com veículo original, data, tema e links).
+- Indicadores: Meta Selic SGS 432 e IPCA mensal SGS 433 do Banco Central (dependem da disponibilidade da API).
+- Assistente financeiro **explicativo e baseado em regras**, com contexto da carteira, moedas e notícias, sem promessas de lucros.
+- Carteira local, alertas no site, radar de preço e simulador mantidos.
 
-**Importante:** NÃO há conta online e sincronização até que a API FastAPI com PostgreSQL e Redis seja publicada e verificada. Alertas não são push. Cotações podem ser indisponíveis/atrasadas. O radar não é previsão nem recomendação.
+**Importante:** IA generativa não está habilitada no site estático. Requer API HTTPS com login, servidor seguro e OPENAI_API_KEY. O backend preparado encontra-se na branch invest-ai-api-render. Não deixar chave na web.
 
-`unzip INVEST_AI_web_source.zip && cd frontend && npm install && npm test && npm run lint && npm run build`
+Os dados locais ficam somente no navegador. Sem compra e venda na corretora, nem alertas push. Notícias do agregador não possuem checagem editorial independente. Ausência de dados externos é exibida como indisponibilidade.
 
-Patch 0.5.1: preserva os dados originais do navegador quando encontra uma versão inválida ou inconsistente, evitando sobrescrita automática.
+O ZIP INVEST_AI_web_source.zip contém o código Next.js. No Render:
+- Branch: invest-ai-web
+- Build command: unzip -q -o INVEST_AI_web_source.zip && cd frontend && npm install --no-audit --no-fund && npm run build
+- Publish: frontend/out
+
+Execução dos testes: unzip INVEST_AI_web_source.zip && cd frontend && npm install && npm test && npm run lint && npm run build.

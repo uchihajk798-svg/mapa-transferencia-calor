@@ -1,0 +1,34 @@
+name: INVEST AI Web 0.6 — Testes e compilação
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [invest-ai-web-v06-check]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Extrair frontend
+        run: unzip -q -o INVEST_AI_web_source.zip
+      - name: Instalar dependências
+        working-directory: frontend
+        run: npm install --no-audit --no-fund
+      - name: Testar carteira, notícia, indicadores e IA educativa
+        working-directory: frontend
+        run: npm test
+      - name: Verificar TypeScript
+        working-directory: frontend
+        run: npm run lint
+      - name: Compilar site para Render
+        working-directory: frontend
+        run: npm run build
+      - name: Verificar arquivos finais
+        run: test -s frontend/out/index.html

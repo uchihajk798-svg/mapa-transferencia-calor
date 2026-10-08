@@ -1,0 +1,33 @@
+name: INVEST AI WEB - Validar site
+on:
+  push:
+    branches: [invest-ai-web]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Extrair projeto web
+        run: unzip -q -o INVEST_AI_web_source.zip
+      - name: Instalar dependencias
+        working-directory: frontend
+        run: npm install --no-audit --no-fund
+      - name: Validar TypeScript
+        working-directory: frontend
+        run: npm run lint
+      - name: Compilar site estatico
+        working-directory: frontend
+        run: npm run build
+      - name: Publicar artefato compilado
+        uses: actions/upload-artifact@v4
+        with:
+          name: INVEST_AI_WEB_STATIC_SITE
+          path: frontend/out
+          if-no-files-found: error

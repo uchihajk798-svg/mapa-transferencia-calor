@@ -1,3 +1,3 @@
-# INVEST AI Web 0.7.1 — Segurança de cadastro
+# INVEST AI — correção Supabase
 
-Saúde da API confirmada somente com version=0.7.0 e persistent_storage=true. Sem conexão real PostgreSQL, o cadastro fica indisponível. Modo educativo, radar e carteira local seguem funcionando. IA generativa somente com chave gratuita do Gemini em backend, nunca com API paga.
+Fonte migrada para Supabase Auth + backup privado e Cloudflare Worker opcional. Render continua ativo até a Cloudflare estar validada. Configure NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (ambas públicas) durante build. As tabelas e RPC foram criadas no projeto Supabase invest-ai. Não usar service_role nem colocar segredos em código. Testar cadastro por e-mail antes do público.

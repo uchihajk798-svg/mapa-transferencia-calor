@@ -1,0 +1,9 @@
+FROM python:3.12-slim
+WORKDIR /srv/invest-ai
+ENV PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
+COPY INVEST_AI_backend_source.zip /srv/invest-ai/INVEST_AI_backend_source.zip
+RUN python -m zipfile -e INVEST_AI_backend_source.zip /srv/invest-ai && rm INVEST_AI_backend_source.zip
+WORKDIR /srv/invest-ai/backend
+RUN pip install --no-cache-dir -r requirements.txt
+EXPOSE 10000
+CMD ["sh", "-c", "alembic upgrade head && exec uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000}"]

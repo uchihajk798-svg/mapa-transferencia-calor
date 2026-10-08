@@ -21,3 +21,9 @@ Não confunda deploy do serviço com cadastro funcional. Após configurar variá
 Recuperação de senha por e-mail continua indisponível sem SMTP configurado.
 
 O banco PostgreSQL do plano gratuito possui data de expiração, que exige acompanhamento antes de receber informações reais de usuários.
+
+
+## INVEST AI IA generativa (v0.6)
+O backend inclui POST /api/ai/explain exigindo sessão autenticada. Sem OPENAI_API_KEY, retorna 503 de maneira explícita. Com variável OPENAI_API_KEY configurada somente no Render, usa Responses API e OPENAI_MODEL (padrão gpt-4.1-mini), store=false, limites de caracteres e autenticação. A API/modelo não está liberada no site público até que backend seguro e conta online sejam validados. O uso da API de IA pode ter custos de fornecedor; não contratar nada automaticamente.
+
+INVEST_AI_backend_source.zip v0.6 contém testes adicionais para rota protegida e configuração ausente.

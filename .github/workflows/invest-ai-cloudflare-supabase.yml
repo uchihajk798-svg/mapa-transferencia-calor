@@ -1,0 +1,43 @@
+name: INVEST AI - Cloudflare + Supabase Preview
+on:
+  push:
+    branches: [invest-ai-cloudflare-supabase]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Extract migration package
+        run: unzip -q -o INVEST_AI_CLOUDFLARE_SUPABASE_PREVIEW.zip
+      - name: Install dependencies
+        working-directory: frontend
+        run: npm install --no-audit --no-fund
+      - name: Test business rules
+        working-directory: frontend
+        run: npm test
+      - name: Check TypeScript
+        working-directory: frontend
+        run: npm run lint
+      - name: Build Next.js export
+        working-directory: frontend
+        run: npm run build
+      - name: Check Cloudflare Worker and static output
+        run: |
+          node --check frontend/worker/index.js
+          test -s frontend/out/index.html
+          test -s supabase/migrations/20261008_invest_ai_initial.sql
+      - name: Upload preview assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: INVEST_AI_CLOUDFLARE_STATIC_BUILD
+          path: frontend/out
+          retention-days: 7

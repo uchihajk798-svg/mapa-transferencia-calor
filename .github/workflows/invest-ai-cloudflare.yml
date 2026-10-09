@@ -1,0 +1,26 @@
+name: INVEST AI Cloudflare - Testes e bundle
+on:
+  push:
+    branches: [invest-ai-cloudflare]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar Wrangler
+        run: npm install --no-audit --no-fund
+      - name: Testar e compilar site
+        run: npm run build
+      - name: Verificar bundle Cloudflare sem publicar
+        run: npm run validate
+      - name: Verificar arquivos gerados
+        run: test -s frontend/out/index.html

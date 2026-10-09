@@ -1,0 +1,13 @@
+{
+  "name": "invest-ai-cloudflare",
+  "version": "0.7.2",
+  "private": true,
+  "scripts": {
+    "build": "unzip -q -o INVEST_AI_web_source.zip && cp cloudflare.public.env frontend/.env.production && cd frontend && npm install --no-audit --no-fund && npm test && npm run lint && npm run build",
+    "deploy": "wrangler deploy",
+    "validate": "wrangler deploy --dry-run"
+  },
+  "devDependencies": {
+    "wrangler": "^4.35.0"
+  }
+}
